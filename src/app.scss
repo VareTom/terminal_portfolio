@@ -1,0 +1,61 @@
+@import "./styles/colors.scss";
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#app {
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: 'Source Code Pro', monospace;
+  color: $font;
+  background: $bg-dark;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, $bg-dark, $bg-mid, $bg-light);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, $bg-dark, $bg-mid, $bg-light); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-repeat: no-repeat;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-column,
+.flex-row {
+  &.center {
+    justify-content: center;
+    align-items: center;
+  }
+  &.end {
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+} 
