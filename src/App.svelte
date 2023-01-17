@@ -1,5 +1,21 @@
 <script lang="ts">
-  const prefix: string = '~$';
+  import { onMount } from "svelte";
+  import { command } from '@/stores';
+  
+  // Components
+  import Command from "./lib/Command.svelte";
+
+  onMount(() => {
+    new Command({target: document.getElementById('content')});
+  });
+
+  command.subscribe(value => {
+    console.log(value);
+    if(value) {
+      new Command({target: document.getElementById('content')});
+    }
+  })
+
 </script>
 
 <main class="full-height full-width flex-row center main">
@@ -9,12 +25,10 @@
       <div class="close-button"></div>
       <div class="close-button"></div>
       <div class="flex-row full-height center title">
-        <p>Varewyck Tom - Terminal Portfolio</p>
+        <p>Varewyck Tom</p>
       </div>
     </div>
-    <div class="content">
-      {prefix}  coucou
-    </div>
+    <div id="content"><div>
   </div>
 </main>
 
@@ -65,7 +79,7 @@
         }
       }
 
-      .content {
+      #content {
         min-height: 200px;
         padding: 10px 15px;
       }
@@ -81,7 +95,7 @@
     }
   }
 
-  @media screen and (min-width: 601px) and (max-width: 750px) {
+  @media screen and (min-width: 601px) and (max-width: 900px) {
     .terminal {
       width: 75vw !important;
       margin: 10px !important;
