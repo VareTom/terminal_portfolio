@@ -1,13 +1,12 @@
 <script lang="ts">
 
   import { command } from '@/stores';
-
   
   const prefix: string = '~/portfolio$';
   let isDisabledInput: boolean = false;
 
   function onSubmitCommand(event) {
-    if (event.code === 'Enter') {
+    if (event.code === 'Enter' && event.target.value) {
       command.set(event.target.value);
       isDisabledInput = true;
     }
@@ -16,7 +15,7 @@
 
 <div class="flex-row full-width prefix-box">
   <span class="prefix">{prefix}</span>
-  <input class="invisible-input" type="text" on:keydown={onSubmitCommand} disabled={isDisabledInput}>
+  <input class="input invisible-input" type="text" on:keydown={onSubmitCommand} disabled={isDisabledInput}>
 </div>
 
 <style lang="scss">

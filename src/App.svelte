@@ -7,14 +7,22 @@
 
   onMount(() => {
     new Command({target: document.getElementById('content')});
+    onToggleInputFocus();
   });
 
   command.subscribe(value => {
     console.log(value);
     if(value) {
       new Command({target: document.getElementById('content')});
+      command.set('');
+      onToggleInputFocus();
     }
   })
+
+  function onToggleInputFocus() {
+    const commandInputs: NodeListOf<HTMLElement> = document.querySelectorAll('.input');
+    commandInputs[commandInputs.length - 1].focus();
+  }
 
 </script>
 
