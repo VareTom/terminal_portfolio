@@ -1,28 +1,20 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { command } from '@/stores';
-  
-  // Components
-  import Command from "./lib/Command.svelte";
+
+  // Helpers
+  import CommandHelper from "./utils/command-helper";
 
   onMount(() => {
-    new Command({target: document.getElementById('content')});
-    onToggleInputFocus();
+    CommandHelper.onInit(true);
   });
 
-  command.subscribe(value => {
-    console.log(value);
-    if(value) {
-      new Command({target: document.getElementById('content')});
-      command.set('');
-      onToggleInputFocus();
+  command.subscribe(insertedCommand => {
+    if(insertedCommand) {
+      console.log(insertedCommand);
+      CommandHelper.onExecute(insertedCommand);
     }
   })
-
-  function onToggleInputFocus() {
-    const commandInputs: NodeListOf<HTMLElement> = document.querySelectorAll('.input');
-    commandInputs[commandInputs.length - 1].focus();
-  }
 
 </script>
 
@@ -44,11 +36,10 @@
   @import './styles/colors';
 
   .main {
-
     .terminal {
       width: 50vw;
       height: auto;
-      
+
       border-radius: 12px;
       background: $bg-dark;
 
@@ -89,12 +80,12 @@
 
       #content {
         min-height: 200px;
-        padding: 10px 15px;
+        padding: 0 15px 10px;
+        max-height: 400px;
+        overflow-y: auto;
       }
     }
-
   }
-
 
   @media screen and (max-width: 600px) {
     .terminal {

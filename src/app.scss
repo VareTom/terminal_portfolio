@@ -59,3 +59,24 @@ body {
   height: 100%;
   width: 100%;
 } 
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $bg-dark;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $bg-light;
+  border-radius: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba($bg-light, 0.5);
+}

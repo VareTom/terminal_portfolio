@@ -25,7 +25,7 @@
   .prefix-box {
     display: flex;
     align-items: center;
-    margin: 15px 0;
+    margin: 15px 0 5px;
     height: 15px;
 
     .prefix {
