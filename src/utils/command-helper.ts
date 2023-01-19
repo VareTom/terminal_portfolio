@@ -4,12 +4,13 @@ import { command } from '@/stores';
 import Command from "@/lib/Command.svelte";
 import Error from "@/lib/Error.svelte";
 import Welcome from "@/lib/Welcome.svelte";
+import Help from "@/lib/Help.svelte";
 
 export default class CommandHelper {
   static onExecute(command: string): void {
     switch(command) {
       case '/help':
-        console.log("/help command inserted!");
+        this.onHelp();
         break;
       case '/reset':
         this.onInit();
@@ -34,6 +35,10 @@ export default class CommandHelper {
         break;
     }
     this.onResetCommandLine();
+  }
+
+  static onHelp(): void {
+    new Help({target: document.getElementById('content')});
   }
 
   static onInit(isResetNeeded?: boolean): void {
