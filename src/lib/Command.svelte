@@ -1,9 +1,14 @@
 <script lang="ts">
 
   import { command } from '@/stores';
+    import { onMount } from 'svelte';
   
-  const prefix: string = '~/portfolio$';
+  let prefix: string = '~/portfolio$';
   let isDisabledInput: boolean = false;
+
+  onMount(() => {
+
+  });
 
   function onSubmitCommand(event) {
     if (event.code === 'Enter' && event.target.value) {
@@ -29,7 +34,7 @@
     height: 15px;
 
     .prefix {
-      color: orange;
+      color: $orange;
     }
 
     .invisible-input {
