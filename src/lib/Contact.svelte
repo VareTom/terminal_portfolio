@@ -21,8 +21,10 @@
 </div>
 
 <style lang="scss">
+  @import '@/styles/colors';
+
   .job {
-    color: orange;
+    color: $orange;
   }
   .links {
     margin: 20px 0;

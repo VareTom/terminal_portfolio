@@ -14,7 +14,7 @@ export default class CommandHelper {
       case '/help':
         this.onHelp();
         break;
-      case '/reset':
+      case 'reset':
         this.onInit();
         break;
       case 'clear':
@@ -23,7 +23,7 @@ export default class CommandHelper {
       case 'ls':
         this.onShowDirectory();
         break;
-      case 'cd contact':
+      case 'cat contact':
         this.onShowPersonalInfos();
         break;
       // case 'ls -la':

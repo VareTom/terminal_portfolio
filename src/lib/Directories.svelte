@@ -1,37 +1,40 @@
 <script lang="ts">
-  interface Directory {
+  interface Entry {
     name: string;
     isDirectory: boolean
   }
 
-  const directories: Directory[] = [
+  const entries: Entry[] = [
+    {name: 'Contact', isDirectory: false},
+    {name: 'Formations', isDirectory: false},
     {name: 'Experiences', isDirectory: true},
-    {name: 'Formations'},
-    {name: 'Contact'},
-    {name: 'LanguageSkills'},
-    {name: 'SoftSkills'}
+    {name: 'SoftSkills', isDirectory: false},
+    {name: 'LanguageSkills', isDirectory: false}
   ];
 
 </script>
 
 <div class="flex-row full-width directories">
-  {#each directories as directory }
-    <p class="directory">{directory.name}</p>
+  {#each entries as entry }
+    <p class="entry" class:directory="{entry.isDirectory}">{entry.name}</p>
   {/each}
 </div>
 
 <style lang="scss">
+  @import '../styles/colors.scss';
 
   .directories {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 
-    .directory {
-      color: blue;
-
+    .entry {
       &:not(:last-child) {
         margin-right: 40px;
       }
+    }
+
+    .directory {
+      color: blue;
     }
   }
 </style>
