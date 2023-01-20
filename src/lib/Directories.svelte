@@ -1,10 +1,11 @@
 <script lang="ts">
   interface Directory {
     name: string;
+    isDirectory: boolean
   }
 
   const directories: Directory[] = [
-    {name: 'Experiences'},
+    {name: 'Experiences', isDirectory: true},
     {name: 'Formations'},
     {name: 'Contact'},
     {name: 'LanguageSkills'},
