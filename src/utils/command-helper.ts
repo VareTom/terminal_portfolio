@@ -5,6 +5,8 @@ import Command from "@/lib/Command.svelte";
 import Error from "@/lib/Error.svelte";
 import Welcome from "@/lib/Welcome.svelte";
 import Help from "@/lib/Help.svelte";
+import Directories from "@/lib/Directories.svelte";
+import Contact from "@/lib/Contact.svelte";
 
 export default class CommandHelper {
   static onExecute(command: string): void {
@@ -16,17 +18,18 @@ export default class CommandHelper {
         this.onInit();
         break;
       case 'clear':
-        console.log("clear command inserted!");
         this.onClearTerminal();
         break;
       case 'ls':
-        console.log("ls command");
-        this.onShowDirectory(false);
+        this.onShowDirectory();
         break;
-      case 'ls -la':
-        console.log("ls command");
-        this.onShowDirectory(true);
+      case 'cd contact':
+        this.onShowPersonalInfos();
         break;
+      // case 'ls -la':
+      //   console.log("ls command");
+      //   this.onShowDirectory(true);
+      //   break;
       default:
         new Error({
           target: document.getElementById('content'), 
@@ -62,7 +65,11 @@ export default class CommandHelper {
     commandInputs[commandInputs.length - 1].focus();
   }
 
-  static onShowDirectory(isList: boolean): void {
-    this.onResetCommandLine();
+  static onShowDirectory(): void {
+    new Directories({target: document.getElementById('content')});
+  }
+
+  static onShowPersonalInfos(): void {
+    new Contact({target: document.getElementById('content')});
   }
 }

@@ -9,7 +9,7 @@
     {name: '/reset', text: 'Reset the terminal with the initial state.'},
     {name: 'clear', text: 'Remove all previous lines in the terminal.'},
     {name: 'la', text: 'Display a list of files and sub-directories in the current directory.'},
-    {name: 'ls -la', text: 'Display a vertical list of files and sub-directories in the current directory.'},
+    // {name: 'ls -la', text: 'Display a vertical list of files and sub-directories in the current directory.'},
     {name: 'cd', text: 'Change current working directory.'},
   ]
 
