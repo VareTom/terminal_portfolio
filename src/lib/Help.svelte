@@ -19,7 +19,7 @@
   <p class="title">Command list :</p>
 
   {#each commands as command }
-    <div class="flex-row full-width command">
+    <div class="flex-row command">
       <!-- <div class="flex-column">-</div> -->
       <div class="flex-column name">- {command.name} : </div>
       <div class="flex-column text">{command.text}</div>
@@ -34,6 +34,7 @@
 <style lang="scss">
 
   .command {
+    width: calc(100% - 20px);
     margin: 5px 10px;
     padding-left: 10px;
     font-size: 12px;
