@@ -7,6 +7,7 @@ import Welcome from "@/lib/Welcome.svelte";
 import Help from "@/lib/Help.svelte";
 import Directories from "@/lib/Directories.svelte";
 import Contact from "@/lib/Contact.svelte";
+import Languages from "@/lib/Languages.svelte";
 
 export default class CommandHelper {
   static onExecute(command: string): void {
@@ -23,13 +24,22 @@ export default class CommandHelper {
       case 'ls':
         this.onShowDirectory();
         break;
+      case 'cat Contact':
       case 'cat contact':
         this.onShowPersonalInfos();
         break;
-      // case 'ls -la':
-      //   console.log("ls command");
-      //   this.onShowDirectory(true);
-      //   break;
+      case 'cat Formations':
+      case 'cat formations':
+        this.onShowFormation();
+        break;
+      case 'cat LanguageSkills':
+      case 'cat languageSkills':
+        this.onShowLanguageSkills();
+        break;
+      case 'cat SoftSkills':
+      case 'cat softSkills':
+        this.onShowSoftSkills();
+        break;
       default:
         new Error({
           target: document.getElementById('content'), 
@@ -71,5 +81,17 @@ export default class CommandHelper {
 
   static onShowPersonalInfos(): void {
     new Contact({target: document.getElementById('content')});
+  }
+
+  static onShowLanguageSkills(): void {
+    new Languages({target: document.getElementById('content')});
+  }
+
+  static onShowFormation(): void {
+    console.log('show formations'); 
+  }
+
+  static onShowSoftSkills(): void {
+    console.log('show soft skills');
   }
 }

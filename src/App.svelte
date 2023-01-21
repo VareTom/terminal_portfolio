@@ -16,9 +16,14 @@
     }
   })
 
+  function onTakeFocus() {
+    CommandHelper.onToggleInputFocus();
+  }
+
 </script>
 
-<main class="full-height full-width flex-row center main">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<main class="full-height full-width flex-row center main" on:click={onTakeFocus}>
   <div class="flex-column terminal">
     <div class="full-width header">
       <div class="close-button"></div>
