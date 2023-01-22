@@ -1,4 +1,7 @@
-import { command } from '@/stores';
+
+// Store
+import { command, previousCommand } from '@/stores';
+import { get } from 'svelte/store';
 
 // Components
 import Command from "@/lib/Command.svelte";
@@ -11,7 +14,7 @@ import Languages from "@/lib/Languages.svelte";
 
 export default class CommandHelper {
   static onExecute(command: string): void {
-    switch(command) {
+    switch (command) {
       case '/help':
         this.onHelp();
         break;
@@ -42,8 +45,8 @@ export default class CommandHelper {
         break;
       default:
         new Error({
-          target: document.getElementById('content'), 
-          props: {message: `bash: ${command}: command not found`}
+          target: document.getElementById('content'),
+          props: { message: `bash: ${command}: command not found` }
         });
         break;
     }
@@ -51,12 +54,12 @@ export default class CommandHelper {
   }
 
   static onHelp(): void {
-    new Help({target: document.getElementById('content')});
+    new Help({ target: document.getElementById('content') });
   }
 
   static onInit(isResetNeeded?: boolean): void {
     this.onClearTerminal();
-    new Welcome({target: document.getElementById('content')});
+    new Welcome({ target: document.getElementById('content') });
     if (isResetNeeded) this.onResetCommandLine();
   }
 
@@ -65,7 +68,8 @@ export default class CommandHelper {
   }
 
   static onResetCommandLine(): void {
-    new Command({target: document.getElementById('content')});
+    new Command({ target: document.getElementById('content') });
+    previousCommand.set(get(command));
     command.set('');
     this.onToggleInputFocus();
   }
@@ -76,19 +80,19 @@ export default class CommandHelper {
   }
 
   static onShowDirectory(): void {
-    new Directories({target: document.getElementById('content')});
+    new Directories({ target: document.getElementById('content') });
   }
 
   static onShowPersonalInfos(): void {
-    new Contact({target: document.getElementById('content')});
+    new Contact({ target: document.getElementById('content') });
   }
 
   static onShowLanguageSkills(): void {
-    new Languages({target: document.getElementById('content')});
+    new Languages({ target: document.getElementById('content') });
   }
 
   static onShowFormation(): void {
-    console.log('show formations'); 
+    console.log('show formations');
   }
 
   static onShowSoftSkills(): void {

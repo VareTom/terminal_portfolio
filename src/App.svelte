@@ -47,6 +47,7 @@
 
       border-radius: 12px;
       background: $bg-dark;
+      overflow-x: hidden;
 
       .header {
         border-top-left-radius: 12px;

@@ -1,18 +1,29 @@
 <script lang="ts">
 
-  import { command } from '@/stores';
-    import { onMount } from 'svelte';
+  import { command, previousCommand } from '@/stores';
+  import { onMount } from 'svelte';
+  import { get } from 'svelte/store';
+  
+  // Helpers
+  import CommandHelper from "@/utils/command-helper";
   
   let prefix: string = '~/portfolio$';
   let isDisabledInput: boolean = false;
+  let inputValue: string = '';
 
   onMount(() => {
 
   });
 
   function onSubmitCommand(event) {
+    console.log(event);
+    if (event.code === 'ArrowDown') inputValue = '';
+    if (event.code === 'ArrowUp' && get(previousCommand)) inputValue = get(previousCommand);
+    if (event.code === 'Tab' && event.target.value) {
+      // TODO:: predict command
+    }
     if (event.code === 'Enter' && event.target.value) {
-      command.set(event.target.value);
+      previousCommand.set(event.target.value);
       isDisabledInput = true;
     }
   }
@@ -20,7 +31,7 @@
 
 <div class="flex-row full-width prefix-box">
   <span class="prefix">{prefix}</span>
-  <input class="input invisible-input" type="text" on:keydown={onSubmitCommand} disabled={isDisabledInput}>
+  <input class="input invisible-input" type="text" on:keydown={onSubmitCommand} disabled={isDisabledInput} bind:value={inputValue}>
 </div>
 
 <style lang="scss">
