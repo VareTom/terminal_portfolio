@@ -1,6 +1,6 @@
 
 // Store
-import { command, previousCommand } from '@/stores';
+import { command, previousCommands } from '@/stores';
 import { get } from 'svelte/store';
 
 // Components
@@ -69,7 +69,9 @@ export default class CommandHelper {
 
   static onResetCommandLine(): void {
     new Command({ target: document.getElementById('content') });
-    previousCommand.set(get(command));
+
+    const historyCommands: string[] = get(previousCommands);
+    if (historyCommands?.length > 0) previousCommands.set([...get(previousCommands) as string[], command]);
     command.set('');
     this.onToggleInputFocus();
   }

@@ -1,6 +1,6 @@
 <script lang="ts">
 
-  import { command, previousCommand } from '@/stores';
+  import { command, previousCommands } from '@/stores';
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
   
@@ -10,20 +10,28 @@
   let prefix: string = '~/portfolio$';
   let isDisabledInput: boolean = false;
   let inputValue: string = '';
+  let previousCommandIndex: number = 0;
 
   onMount(() => {
 
   });
 
   function onSubmitCommand(event) {
-    console.log(event);
     if (event.code === 'ArrowDown') inputValue = '';
-    if (event.code === 'ArrowUp' && get(previousCommand)) inputValue = get(previousCommand);
+    if (event.code === 'ArrowUp') {
+      const historyCommands: string[] = get(previousCommands);
+      console.log(historyCommands);
+      
+      if (historyCommands.length > 0) {
+        inputValue = previousCommandIndex <= historyCommands.length ? historyCommands[previousCommandIndex] : historyCommands[historyCommands.length-1];
+        previousCommandIndex++;
+      }
+    } 
     if (event.code === 'Tab' && event.target.value) {
       // TODO:: predict command
     }
     if (event.code === 'Enter' && event.target.value) {
-      previousCommand.set(event.target.value);
+      command.set(event.target.value);
       isDisabledInput = true;
     }
   }
@@ -36,7 +44,7 @@
 
 <style lang="scss">
 
-  @import '../styles/colors.scss';
+  @import '@/styles/colors.scss';
 
   .prefix-box {
     display: flex;
