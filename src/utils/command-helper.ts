@@ -1,7 +1,6 @@
 
 // Store
 import { command, previousCommands } from '@/stores';
-import { get } from 'svelte/store';
 
 // Components
 import Command from "@/lib/Command.svelte";
@@ -11,6 +10,7 @@ import Help from "@/lib/Help.svelte";
 import Directories from "@/lib/Directories.svelte";
 import Contact from "@/lib/Contact.svelte";
 import Languages from "@/lib/Languages.svelte";
+import History from "@/lib/History.svelte";
 
 export default class CommandHelper {
   static onExecute(command: string): void {
@@ -26,6 +26,9 @@ export default class CommandHelper {
         break;
       case 'ls':
         this.onShowDirectory();
+        break;
+      case 'history':
+        this.onShowHistory();
         break;
       case 'cat Contact':
       case 'cat contact':
@@ -50,7 +53,7 @@ export default class CommandHelper {
         });
         break;
     }
-    this.onResetCommandLine();
+    this.onResetCommandLine(command);
   }
 
   static onHelp(): void {
@@ -67,11 +70,11 @@ export default class CommandHelper {
     document.getElementById('content').innerHTML = '';
   }
 
-  static onResetCommandLine(): void {
+  static onResetCommandLine(currentCommand?: string): void {
     new Command({ target: document.getElementById('content') });
 
-    const historyCommands: string[] = get(previousCommands);
-    if (historyCommands?.length > 0) previousCommands.set([...get(previousCommands) as string[], command]);
+    if (currentCommand) previousCommands.update((commands: string[]) => [...commands, currentCommand]);
+
     command.set('');
     this.onToggleInputFocus();
   }
@@ -99,5 +102,9 @@ export default class CommandHelper {
 
   static onShowSoftSkills(): void {
     console.log('show soft skills');
+  }
+
+  static onShowHistory(): void {
+    new History({ target: document.getElementById('content') });
   }
 }

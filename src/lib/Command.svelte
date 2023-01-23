@@ -17,11 +17,15 @@
   });
 
   function onSubmitCommand(event) {
-    if (event.code === 'ArrowDown') inputValue = '';
+    if (event.code === 'ArrowDown') {
+      const historyCommands: string[] = get(previousCommands);
+      if (historyCommands.length > 0 && previousCommandIndex >= 0) {
+        previousCommandIndex--;
+        inputValue = previousCommandIndex <= historyCommands.length ? historyCommands[previousCommandIndex] : '';
+      }
+    }
     if (event.code === 'ArrowUp') {
       const historyCommands: string[] = get(previousCommands);
-      console.log(historyCommands);
-      
       if (historyCommands.length > 0) {
         inputValue = previousCommandIndex <= historyCommands.length ? historyCommands[previousCommandIndex] : historyCommands[historyCommands.length-1];
         previousCommandIndex++;
