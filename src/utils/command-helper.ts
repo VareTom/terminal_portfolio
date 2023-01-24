@@ -9,8 +9,8 @@ import Welcome from "@/lib/Welcome.svelte";
 import Help from "@/lib/Help.svelte";
 import Directories from "@/lib/Directories.svelte";
 import Contact from "@/lib/Contact.svelte";
-import Languages from "@/lib/Languages.svelte";
 import History from "@/lib/History.svelte";
+import Skills from "@/lib/Skills.svelte";
 
 export default class CommandHelper {
   static onExecute(command: string): void {
@@ -40,11 +40,13 @@ export default class CommandHelper {
         break;
       case 'cat LanguageSkills':
       case 'cat languageSkills':
-        this.onShowLanguageSkills();
+      case 'cat languageskills':
+        this.onShowSkills(true);
         break;
       case 'cat SoftSkills':
       case 'cat softSkills':
-        this.onShowSoftSkills();
+      case 'cat softskills':
+        this.onShowSkills(false);
         break;
       default:
         new Error({
@@ -92,16 +94,12 @@ export default class CommandHelper {
     new Contact({ target: document.getElementById('content') });
   }
 
-  static onShowLanguageSkills(): void {
-    new Languages({ target: document.getElementById('content') });
-  }
-
   static onShowFormation(): void {
     console.log('show formations');
   }
 
-  static onShowSoftSkills(): void {
-    console.log('show soft skills');
+  static onShowSkills(isLanguageToDisplay: boolean): void {
+    new Skills({ target: document.getElementById('content'), props: {isLanguageToDisplay: isLanguageToDisplay} });
   }
 
   static onShowHistory(): void {
