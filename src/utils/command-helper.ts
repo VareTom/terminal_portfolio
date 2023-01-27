@@ -76,9 +76,7 @@ export default class CommandHelper {
 
   static onResetCommandLine(currentCommand?: string): void {
     new Command({ target: document.getElementById('content') });
-
-    if (currentCommand) previousCommands.update((commands: string[]) => [...commands, currentCommand]);
-
+    if (currentCommand) previousCommands.update((commands: string[]) => commands.length > 0 ? [...commands, currentCommand] : [currentCommand]);
     command.set('');
     this.onToggleInputFocus();
   }

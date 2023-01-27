@@ -17,19 +17,15 @@
   });
 
   function onSubmitCommand(event) {
-    if (event.code === 'ArrowDown') {
-      const historyCommands: string[] = get(previousCommands);
-      if (historyCommands.length > 0 && previousCommandIndex >= 0) {
-        previousCommandIndex--;
-        inputValue = previousCommandIndex <= historyCommands.length ? historyCommands[previousCommandIndex] : '';
-      }
+    console.log(event)
+    const historyCommands: string[] = get(previousCommands);
+    if (event.code === 'ArrowDown' && historyCommands.length > 0 && previousCommandIndex >= 0) {
+      previousCommandIndex--;
+      inputValue = previousCommandIndex > 0 ? historyCommands[previousCommandIndex] : '';
     }
-    if (event.code === 'ArrowUp') {
-      const historyCommands: string[] = get(previousCommands);
-      if (historyCommands.length > 0) { //
-        inputValue = previousCommandIndex <= historyCommands.length ? historyCommands[previousCommandIndex] : historyCommands[historyCommands.length-1];
-        previousCommandIndex++;
-      }
+    if (event.code === 'ArrowUp' && historyCommands.length > 0) {
+      if (previousCommandIndex < historyCommands.length) previousCommandIndex++;
+      inputValue = previousCommandIndex <= historyCommands.length ? historyCommands[historyCommands.length - previousCommandIndex] : historyCommands[0];
     }
 
     if (event.code === 'Tab' && event.target.value) {

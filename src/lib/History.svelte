@@ -7,7 +7,8 @@
 
   onMount(() => {
     commands = get(previousCommands);
-    commands = commands.reverse();
+      console.log(commands)
+    //commands = commands.reverse();
   })
 
 </script>
