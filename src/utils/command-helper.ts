@@ -11,12 +11,14 @@ import Directories from "@/lib/Directories.svelte";
 import Contact from "@/lib/Contact.svelte";
 import History from "@/lib/History.svelte";
 import Skills from "@/lib/Skills.svelte";
+import Formations from "@/lib/Formations.svelte";
+import Experiences from "@/lib/Experiences.svelte";
 
 export default class CommandHelper {
   static onExecute(command: string): void {
     switch (command) {
       case '/help':
-        this.onHelp();
+        new Help({ target: document.getElementById('content') });
         break;
       case 'reset':
         this.onInit();
@@ -25,18 +27,22 @@ export default class CommandHelper {
         this.onClearTerminal();
         break;
       case 'ls':
-        this.onShowDirectory();
+        new Directories({ target: document.getElementById('content') });
+        break;
+      case 'ls Experiences':
+      case 'ls experiences':
+        new Experiences({ target: document.getElementById('content') });
         break;
       case 'history':
-        this.onShowHistory();
+        new History({ target: document.getElementById('content') });
         break;
       case 'cat Contact':
       case 'cat contact':
-        this.onShowPersonalInfos();
+        new Contact({ target: document.getElementById('content') });
         break;
       case 'cat Formations':
       case 'cat formations':
-        this.onShowFormation();
+        new Formations({ target: document.getElementById('content') });
         break;
       case 'cat LanguageSkills':
       case 'cat languageSkills':
@@ -56,10 +62,6 @@ export default class CommandHelper {
         break;
     }
     this.onResetCommandLine(command);
-  }
-
-  static onHelp(): void {
-    new Help({ target: document.getElementById('content') });
   }
 
   static onInit(isResetNeeded?: boolean): void {
@@ -86,23 +88,7 @@ export default class CommandHelper {
     commandInputs[commandInputs.length - 1].focus();
   }
 
-  static onShowDirectory(): void {
-    new Directories({ target: document.getElementById('content') });
-  }
-
-  static onShowPersonalInfos(): void {
-    new Contact({ target: document.getElementById('content') });
-  }
-
-  static onShowFormation(): void {
-    console.log('show formations');
-  }
-
   static onShowSkills(isLanguageToDisplay: boolean): void {
     new Skills({ target: document.getElementById('content'), props: {isLanguageToDisplay: isLanguageToDisplay} });
-  }
-
-  static onShowHistory(): void {
-    new History({ target: document.getElementById('content') });
   }
 }

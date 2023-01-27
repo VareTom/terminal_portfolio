@@ -27,11 +27,7 @@
   export let isLanguageToDisplay: boolean;
 
   onMount(() => {
-    if (isLanguageToDisplay) {
-      skills = languages;
-    } else {
-      skills = soft;
-    }
+    skills = isLanguageToDisplay ? languages: soft;
   })
 
 </script>

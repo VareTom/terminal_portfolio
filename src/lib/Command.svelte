@@ -26,11 +26,12 @@
     }
     if (event.code === 'ArrowUp') {
       const historyCommands: string[] = get(previousCommands);
-      if (historyCommands.length > 0) {
+      if (historyCommands.length > 0) { //
         inputValue = previousCommandIndex <= historyCommands.length ? historyCommands[previousCommandIndex] : historyCommands[historyCommands.length-1];
         previousCommandIndex++;
       }
-    } 
+    }
+
     if (event.code === 'Tab' && event.target.value) {
       // TODO:: predict command
     }
