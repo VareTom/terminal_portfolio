@@ -28,6 +28,9 @@ export default class CommandHelper {
       case 'clear':
         this.onClearTerminal();
         break;
+      case 'history':
+        new History({ target: document.getElementById('content') });
+        break;
       case 'ls':
         if (directory) {
           new Experiences({ target: document.getElementById('content') });
@@ -37,18 +40,36 @@ export default class CommandHelper {
         break;
       case 'ls Experiences':
       case 'ls experiences':
-        new Experiences({ target: document.getElementById('content') });
-        break;
-      case 'history':
-        new History({ target: document.getElementById('content') });
+        if (!directory) {
+          new Experiences({ target: document.getElementById('content') });
+        } else {
+          new Error({
+            target: document.getElementById('content'),
+            props: { message: `bash: ${command}: No such file or directory` }
+          });
+        }
         break;
       case 'cat Contact':
       case 'cat contact':
-        new Contact({ target: document.getElementById('content') });
+        if (!directory) {
+          new Contact({ target: document.getElementById('content') });
+        } else {
+          new Error({
+            target: document.getElementById('content'),
+            props: { message: `bash: ${command}: No such file or directory` }
+          });
+        }
         break;
       case 'cat Formations':
       case 'cat formations':
-        new Formations({ target: document.getElementById('content') });
+        if (!directory) {
+          new Formations({ target: document.getElementById('content') });
+        } else {
+          new Error({
+            target: document.getElementById('content'),
+            props: { message: `bash: ${command}: No such file or directory` }
+          });
+        }
         break;
       case 'cd Experiences':
       case 'cd experiences':
@@ -61,12 +82,26 @@ export default class CommandHelper {
       case 'cat LanguageSkills':
       case 'cat languageSkills':
       case 'cat languageskills':
-        this.onShowSkills(true);
+        if (!directory) {
+          this.onShowSkills(true);
+        } else {
+          new Error({
+            target: document.getElementById('content'),
+            props: { message: `bash: ${command}: No such file or directory` }
+          });
+        }
         break;
       case 'cat SoftSkills':
       case 'cat softSkills':
       case 'cat softskills':
-        this.onShowSkills(false);
+        if (!directory) {
+          this.onShowSkills(false);
+        } else {
+          new Error({
+            target: document.getElementById('content'),
+            props: { message: `bash: ${command}: No such file or directory` }
+          });
+        }
         break;
       default:
         new Error({
