@@ -1,23 +1,24 @@
 <script lang="ts">
 
-  import { command, previousCommands } from '@/stores';
+  import { command, previousCommands, currentDirectory } from '@/stores';
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
   
   // Helpers
-  import CommandHelper from "@/utils/command-helper";
+  import {Constants} from "@/utils/constants";
   
-  let prefix: string = '~/portfolio$';
+  let prefix: string = '';
   let isDisabledInput: boolean = false;
   let inputValue: string = '';
   let previousCommandIndex: number = 0;
 
   onMount(() => {
-
+    let initialPrefix: string = '~/portfolio';
+    const directory: string = get(currentDirectory);
+    prefix = directory ? `${initialPrefix}/${directory}$`: initialPrefix + '$';
   });
 
   function onSubmitCommand(event) {
-    console.log(event)
     const historyCommands: string[] = get(previousCommands);
     if (event.code === 'ArrowDown' && historyCommands.length > 0 && previousCommandIndex >= 0) {
       previousCommandIndex--;
@@ -29,7 +30,10 @@
     }
 
     if (event.code === 'Tab' && event.target.value) {
-      // TODO:: predict command
+      let command: string = event.target.value;
+      if (Constants.availablesCommands.indexOf(command.split('')[0]) !== 0) {
+        console.log(event.target.value)
+      }
     }
     if (event.code === 'Enter' && event.target.value) {
       command.set(event.target.value);

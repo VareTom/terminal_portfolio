@@ -1,6 +1,7 @@
 
 // Store
-import { command, previousCommands } from '@/stores';
+import { command, previousCommands, currentDirectory } from '@/stores';
+import {get} from "svelte/store";
 
 // Components
 import Command from "@/lib/Command.svelte";
@@ -16,6 +17,7 @@ import Experiences from "@/lib/Experiences.svelte";
 
 export default class CommandHelper {
   static onExecute(command: string): void {
+    const directory: string = get(currentDirectory);
     switch (command) {
       case '/help':
         new Help({ target: document.getElementById('content') });
@@ -27,7 +29,11 @@ export default class CommandHelper {
         this.onClearTerminal();
         break;
       case 'ls':
-        new Directories({ target: document.getElementById('content') });
+        if (directory) {
+          new Experiences({ target: document.getElementById('content') });
+        } else {
+          new  Directories({ target: document.getElementById('content') });
+        }
         break;
       case 'ls Experiences':
       case 'ls experiences':
@@ -43,6 +49,14 @@ export default class CommandHelper {
       case 'cat Formations':
       case 'cat formations':
         new Formations({ target: document.getElementById('content') });
+        break;
+      case 'cd Experiences':
+      case 'cd experiences':
+        currentDirectory.set(command.split(' ').reverse()[0]);
+        break;
+      case 'cd':
+      case 'cd ..':
+        currentDirectory.set('');
         break;
       case 'cat LanguageSkills':
       case 'cat languageSkills':
