@@ -21,7 +21,7 @@
     const historyCommands: string[] = get(previousCommands);
     if (event.code === 'ArrowDown' && historyCommands.length > 0 && previousCommandIndex >= 0) {
       previousCommandIndex--;
-      inputValue = previousCommandIndex > 0 ? historyCommands[previousCommandIndex] : '';
+      inputValue = previousCommandIndex > 0 ? historyCommands[historyCommands.length - previousCommandIndex] : '';
     }
     if (event.code === 'ArrowUp' && historyCommands.length > 0) {
       if (previousCommandIndex < historyCommands.length) previousCommandIndex++;
