@@ -1,15 +1,16 @@
 <script lang="ts">
-    interface Experience {
-        title: string;
-        duration: string;
-        description: string;
-    }
+  interface Experience {
+    title: string;
+    duration: string;
+    description: string;
+  }
 
-    const experiences: Experience[] = [
-        {title: 'Application Development Internship @ IT-School', duration: 'February 2020 - April 2020', description: 'Integration of new functionalities in the web platform allowing establishments schools to go digital. Symfony, HTML5, CSS3, JavaScript, jQuery, Ajax, RESTful & Github'},
-        {title: 'Front-End Developer @ Inforius', duration: 'August 2020 - June 2021', description: 'Development of CMS with the aim of digitizing the various services of Belgian communal establishments. Angular, Kotlin & Azure'},
-        {title: 'Full Stack Developer @ Underside', duration: 'June 2021 - now()', description: 'Mobile applications & CMS development for different type of sector. Angular, NodeJS, Ionic, Python, Linux & MacOS'},
-    ];
+  const experiences: Experience[] = [
+    {title: 'Application Development Internship @ IT-School', duration: 'February 2020 - April 2020', description: 'Integration of new functionalities in the web platform allowing establishments schools to go digital. Symfony, HTML5, CSS3, JavaScript, jQuery, Ajax, RESTful & Github'},
+    {title: 'Front-End Developer @ Inforius', duration: 'August 2020 - June 2021', description: 'Development of CMS with the aim of digitizing the various services of Belgian communal establishments. Angular, Kotlin & Azure'},
+    {title: 'Full Stack Developer @ Underside', duration: 'June 2021 - March 2023', description: 'Mobile applications & CMS development for different type of sector. Angular, NodeJS, Ionic, Python, Linux & MacOS'},
+    {title: 'Front-End Developer @ ID Weaver', duration: 'March 2023 - now()', description: 'Front End development for different client.'},
+  ];
 </script>
 
 <div class="flex-row experiences">
